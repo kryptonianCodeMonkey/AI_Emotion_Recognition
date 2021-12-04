@@ -35,8 +35,8 @@ y = df['emotion'].values
 class_names = ['Angry', 'Disgust', 'Fear', 'Happy', 'Sad', 'Surprise', 'Neutral']
 # Visualization a few sample images
 plt.figure(figsize=(5, 5))
-for i in range(6):
-    plt.subplot(2, 3, i+1)
+for i in range(30):
+    plt.subplot(5, 6, i+1)
     plt.xticks([])
     plt.yticks([])
     plt.grid(False)
@@ -47,7 +47,7 @@ plt.show()
 print("\n-----TRAINING AND TEST SET SHAPES-----")
 ## Split data into training and test sets
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(faces, y, test_size=0.1, random_state=46)
+X_train, X_test, y_train, y_test = train_test_split(faces, y, test_size=0.4, random_state=46)
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 #Train SVC Classifier
@@ -66,11 +66,11 @@ print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 
 #Train Naive Bayes Classifier
-from sklearn.naive_bayes import GaussianNB
-gnb = GaussianNB()
+from sklearn.naive_bayes import MultinomialNB
+gnb = MultinomialNB()
 y_pred = gnb.fit(X_train, y_train).predict(X_test)
 
-print("\n-----GAUSSIAN BAYES CONFUSION MATRIX AND CLASSIFICATION REPORT-----")
+print("\n-----MULTINOMINAL BAYES CONFUSION MATRIX AND CLASSIFICATION REPORT-----")
 # For classification tasks some commonly used metrics are confusion matrix, precision, recall, and F1 score.
 # These are calculated by using sklearn's metrics library contains the classification_report and confusion_matrix methods
 print(confusion_matrix(y_test, y_pred))
