@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 
 print("\n-----DATASET INFO-----")
 ''' ### Read csv data '''
-df = pd.read_csv('datasets\\fer2013\\train.csv')
+df = pd.read_csv('datasets/fer2013/train.csv')
 print("There are total ", len(df), " sample in the loaded dataset.")
 print("The size of the dataset is: ", df.shape)
 # get a subset of the whole data for now
@@ -71,6 +71,17 @@ gnb = GaussianNB()
 y_pred = gnb.fit(X_train, y_train).predict(X_test)
 
 print("\n-----GAUSSIAN BAYES CONFUSION MATRIX AND CLASSIFICATION REPORT-----")
+# For classification tasks some commonly used metrics are confusion matrix, precision, recall, and F1 score.
+# These are calculated by using sklearn's metrics library contains the classification_report and confusion_matrix methods
+print(confusion_matrix(y_test, y_pred))
+print(classification_report(y_test, y_pred))
+
+#Train Neural Net Classifier
+from sklearn.neural_network import MLPClassifier
+clf = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1)
+y_pred = clf.fit(X_train, y_train).predict(X_test)
+
+print("\n-----NEURAL NETWORK CONFUSION MATRIX AND CLASSIFICATION REPORT-----")
 # For classification tasks some commonly used metrics are confusion matrix, precision, recall, and F1 score.
 # These are calculated by using sklearn's metrics library contains the classification_report and confusion_matrix methods
 print(confusion_matrix(y_test, y_pred))
